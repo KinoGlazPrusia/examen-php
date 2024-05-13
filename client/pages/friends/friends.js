@@ -1,4 +1,6 @@
 import * as api from '../../js/utils/api.js'
+import setupFriendList from '../../js/friends/friendList.js'
+import setupSuggestedFriends from '../../js/friends/suggestedFriends.js'
 
 document.addEventListener("DOMContentLoaded", async () => {
      /* CHEQUEJEM SI L'USUARI ESTÀ LOGUEJAT, SINO, EL TORNEM A LA PÀGINA DE LOGIN */
@@ -8,48 +10,24 @@ document.addEventListener("DOMContentLoaded", async () => {
      }
 
      setupLogout()
-     setupSearchBar()
+     setupGoBack()
+     setupUserCard()
      setupFriendList()
+     setupSuggestedFriends()
 })
 
-/* COMPONENT DE LLISTA D'AMICS */
-function setupFriendList() {
-    api.getFriends()
-        .then(response => {
-            handleResponse(response)
-        })
+function setupGoBack() {
+    const goBackBtn = document.querySelector('.go-back')
+    goBackBtn.onclick = () => location.replace('/examen-php/client/pages/home/home.html')
 }
 
-/* COMPONENT SEARCHBAR */
-function setupSearchBar() {
-    const searchInput = document.querySelector('.searchbar input')
-    searchInput.oninput = (e) => handleInput(e)
-}
+function setupUserCard() {
+    const userName = document.querySelector('.user-name')
+    const userUsername = document.querySelector('.user-username')
 
-function handleInput(e) {
-    const filter = document.querySelector('.filter-select').value
-    const filterValue = document.querySelector('.searchbar-input').value
-
-    api.getFriends({filter: filter, value: filterValue})
-        .then(response => {
-            handleResponse(response)
-        })
-}
-
-function handleResponse(data) {
-    const friendListHTML = document.querySelector('.friend-list')
-    friendListHTML.innerHTML = ''
-    const friends = data.message
-
-    friends.forEach(friend => {
-        const friendCardHTML = `
-            <div class="user-card friend">
-                <img src=${friend.image} alt="Foto de perfil del usuario" class="user-image">
-                <span class="user-name">${friend.name}</span>
-                <span class="user-username">${friend.lastname}</span>
-            </div>
-        `
-        friendListHTML.innerHTML += friendCardHTML
+    api.getUserInfo().then(response => {
+        userName.textContent = `${response.message.name} ${response.message.lastname}`
+        userUsername.textContent = '@' + response.message.username
     })
 }
 

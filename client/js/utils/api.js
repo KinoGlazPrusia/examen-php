@@ -161,3 +161,17 @@ export async function getFriends(filter=null) {
         throw error
     }
 }
+
+export async function getSuggestedFriends(){
+    const url = '/examen-php/server/api/friends/get-suggested-friends.php'
+    try {
+        const response = await fetch(url)
+        if (!response.status === 200) {
+            throw new Error('Error en la solicitud HTTP')
+        }
+        const data = await response.json()
+        return data 
+    } catch (error) {
+        throw error
+    }
+}

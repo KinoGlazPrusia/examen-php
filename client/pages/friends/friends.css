@@ -7,12 +7,17 @@
     justify-content: center;
     align-items: center;
     gap: 1em;
+    
+    overflow-x: hidden;
 }
 
 .searchbar {
     padding: 0.5em;
     padding-block: 0;
     box-sizing: border-box;
+
+    min-height: 45px;
+    max-height: 45px;
 
     display: flex;
     flex-direction: row;
@@ -50,10 +55,11 @@
     gap: 1em;
 }
 
+/* FRIEND CARD */
 .friend {
-    width: 200px;
+    width: 250px;
 
-    border-radius: 100pt;
+    border-radius: 5pt;
     border:1px solid lightgray;
     box-shadow: 5px 5px 10px -5px rgba(0,0,0,0.2);
 
@@ -64,6 +70,32 @@
     background-color: rgb(226, 239, 243);
 }
 
+.friend img {
+    margin-left: 1em;
+    justify-self: start;
+    grid-row-start: span 3;
+}
+
+.friend .user-name {
+    padding-right: 1em;
+    justify-self: end;
+}
+
+.friend .user-username {
+    padding-right: 1em;
+    justify-self: end;
+    font-size: 0.9em;
+    color: black;
+}
+
+.friend .user-email {
+    padding-right: 1em;
+    justify-self: end;
+    font-size: 0.75em;
+    color: gray;
+}
+
+/* FILTER */
 .filter-select {
     padding: 0.5em;
     box-sizing: border-box;
@@ -78,4 +110,49 @@
 
 .filter-select:active {
     border: none;
+}
+
+.go-back {
+    appearance: none;
+    cursor: pointer;
+
+    position: absolute;
+    top: 7em;
+    left: 2em;
+
+    height: 50px;
+    width: 50px;
+
+    border: none;
+    border-radius: 100pt;
+
+    display: grid;
+    place-content: center;
+
+    transition: 300ms;
+}
+
+.go-back:hover {
+    background-color: lightgray;
+}
+
+/* SUGGESTED */
+.suggested {
+    padding: 1em;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    border-radius: 10pt;
+
+    background-color: rgb(210, 227, 233);
+}
+
+.suggested .user-card {
+    background-color: hsla(0, 0%, 100%, 0.5);
+}
+
+.suggested .user-card:hover {
+    background-color: hsla(0, 0%, 100%, 0.8);
 }

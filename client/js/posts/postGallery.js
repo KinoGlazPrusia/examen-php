@@ -25,8 +25,6 @@ function showCreatePostModal() {
             modal.style.display = 'none'
         }
     }
-
-
 }
 
 function handleResponse(response) {
